@@ -1,0 +1,52 @@
+{include file="$style_dir/blocks/manage/account_left.html"}
+<div class="myAccountContainer clearfix">
+    <h2>My Wallet</h2>
+    <p><strong>Current Balance:</strong> ${$wallet_balance|number_format:2}</p>
+
+    <div style="display:flex;gap:15px;">
+        <form method="post">
+            <h4>Add Funds</h4>
+            <input type="hidden" name="wallet_action" value="add_funds" />
+            <input type="text" name="amount" placeholder="Amount" />
+            <input type="text" name="description" placeholder="Description" />
+            <button type="submit">Add</button>
+        </form>
+
+        <form method="post">
+            <h4>Withdraw Funds</h4>
+            <input type="hidden" name="wallet_action" value="withdraw_funds" />
+            <input type="text" name="amount" placeholder="Amount" />
+            <input type="text" name="description" placeholder="Description" />
+            <button type="submit">Withdraw</button>
+        </form>
+
+        <form method="post">
+            <h4>Transfer Funds</h4>
+            <input type="hidden" name="wallet_action" value="transfer_funds" />
+            <input type="text" name="to_username" placeholder="Recipient username" />
+            <input type="text" name="amount" placeholder="Amount" />
+            <input type="text" name="description" placeholder="Description" />
+            <button type="submit">Transfer</button>
+        </form>
+    </div>
+
+    <h3>Recent Transactions</h3>
+    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Date</th><th>Type</th><th>Amount</th><th>Counterparty</th><th>Description</th>
+        </tr>
+        {if $wallet_transactions}
+            {foreach from=$wallet_transactions item=tx}
+                <tr>
+                    <td>{$tx.date_added}</td>
+                    <td>{$tx.transaction_type|capitalize}</td>
+                    <td>${$tx.amount}</td>
+                    <td>{if $tx.related_username}{$tx.related_username}{else}-{/if}</td>
+                    <td>{$tx.description}</td>
+                </tr>
+            {/foreach}
+        {else}
+            <tr><td colspan="5">No transactions found.</td></tr>
+        {/if}
+    </table>
+</div>

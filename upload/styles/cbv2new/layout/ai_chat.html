@@ -1,0 +1,30 @@
+<div class="ai-chat-wrap">
+    <h2>AI Chat Assistant</h2>
+    <p class="ai-chat-meta">
+        Model: <strong>{$ai_model}</strong>
+        {if !$openai_api_ready}
+            <span class="ai-chat-warning">(OPENAI_API_KEY is missing on server)</span>
+        {/if}
+    </p>
+
+    <div class="ai-chat-history">
+        {if $ai_chat_history}
+            {foreach from=$ai_chat_history item=msg}
+                <div class="ai-chat-msg ai-chat-{$msg.role}">
+                    <div class="ai-chat-role">{$msg.role|capitalize}</div>
+                    <div class="ai-chat-text">{$msg.content|escape|nl2br}</div>
+                </div>
+            {/foreach}
+        {else}
+            <div class="ai-chat-empty">No messages yet. Start the conversation below.</div>
+        {/if}
+    </div>
+
+    <form method="post" class="ai-chat-form">
+        <textarea name="prompt" rows="5" placeholder="Ask anything about videos, content ideas, SEO, moderation, or community management..."></textarea>
+        <div class="ai-chat-actions">
+            <button type="submit" name="send_chat" value="yes">Send</button>
+            <button type="submit" name="clear_chat" value="yes" class="secondary">Clear Chat</button>
+        </div>
+    </form>
+</div>

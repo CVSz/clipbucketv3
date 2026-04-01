@@ -3233,6 +3233,7 @@ class userquery extends CBCategory
                 array
                     (
                     lang('my_account') => 'myaccount.php',
+                    lang('wallet') => 'wallet.php',
                     lang('block_users') => 'edit_account.php?mode=block_users',
                     lang('user_change_pass') => 'edit_account.php?mode=change_password',
                     lang('user_change_email') => 'edit_account.php?mode=change_email',

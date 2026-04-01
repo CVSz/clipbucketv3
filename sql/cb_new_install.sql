@@ -2317,3 +2317,26 @@ CREATE TABLE IF NOT EXISTS `video_files` (
 --
 -- Dumping data for table `video_files`
 --
+CREATE TABLE IF NOT EXISTS `wallets` (
+  `wallet_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `userid` INT(11) NOT NULL,
+  `balance` DECIMAL(12,2) NOT NULL DEFAULT '0.00',
+  `date_added` DATETIME NOT NULL,
+  `last_updated` DATETIME NOT NULL,
+  PRIMARY KEY (`wallet_id`),
+  UNIQUE KEY `userid_unique` (`userid`),
+  KEY `userid_idx` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `wallet_transactions` (
+  `transaction_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `userid` INT(11) NOT NULL,
+  `related_userid` INT(11) DEFAULT NULL,
+  `transaction_type` ENUM('credit','debit') NOT NULL,
+  `amount` DECIMAL(12,2) NOT NULL,
+  `description` VARCHAR(255) DEFAULT NULL,
+  `date_added` DATETIME NOT NULL,
+  PRIMARY KEY (`transaction_id`),
+  KEY `wallet_userid_idx` (`userid`),
+  KEY `wallet_related_userid_idx` (`related_userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

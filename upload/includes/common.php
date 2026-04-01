@@ -177,6 +177,7 @@ require_once('classes/collections.class.php');
 require_once('classes/photos.class.php');
 require_once('classes/menuhandler.class.php');
 require_once('classes/cbfeeds.class.php');
+require_once('classes/wallet.class.php');
 
 //Adding Gravatar
 require_once('classes/gravatar.class.php');
@@ -213,6 +214,7 @@ $cbcollection = new Collections();
 $cbphoto = new CBPhotos();
 
 $cbfeeds = new cbfeeds();
+$cbwallet = new CBWallet();
 //	$cbmenu		= new MenuHandler();
 check_install('after');
 require 'defined_links.php';

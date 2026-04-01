@@ -127,7 +127,7 @@ function TagClouds($cloudquery)
     while ($t = mysql_fetch_array($query))
     {
         $db = explode(' ', $t[0]);
-        while (list($key, $value) = each($db))
+        foreach ($db as $value)
         {
             @$keyword[$value] += 1;
         }
